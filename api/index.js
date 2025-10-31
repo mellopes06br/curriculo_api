@@ -1,15 +1,36 @@
-import express from 'express'
+import "dotenv/config";
+import cors from "cors";
+import express from "express";
 
-const app = express()
+const db = require('./models'); // Importa o 'models/index.js'
 
-app.get('/', function(req, res) {
-    res.json('Rota inicial')
-})
+const app = express();
 
-app.get('/user', function(req,res) {
-    res.json('Rota user')
-})
+// --- Middlewares ---
+app.use(cors()); // Habilita o CORS
+app.use(express.json()); // Habilita o Express para ler JSON no body
 
-app.listen(3000, () => {
-    console.log('Servidor rodando em http://localhost:3000')
-}) 
+
+app.get('/', (req, res) => {
+  res.send('API do Currículo está no ar!');
+});
+
+// --- Inicialização do Servidor e Sincronização do Banco ---
+const PORT = process.env.PORT || 3000;
+
+async function iniciarServidor() {
+  try {
+    // Sincroniza os models com o banco de dados
+    // { force: false } garante que as tabelas não sejam recriadas
+    await db.sequelize.sync({ force: false }); 
+    console.log('Tabelas sincronizadas com o banco de dados. 🔄');
+
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT} 🚀`);
+    });
+  } catch (error) {
+    console.error('Erro ao sincronizar ou iniciar o servidor: 🔴', error);
+  }
+}
+
+iniciarServidor();
