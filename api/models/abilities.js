@@ -1,5 +1,6 @@
-const { DataTypes } = rerquire('sequelize');
-const sequelize = require('../index/database');
+import { DataTypes } from 'sequelize'; 
+import sequelize from '../config/database.js';
+
 
 const Abilities = sequelize.define("Abilities", {
     name_abi: {
@@ -10,6 +11,8 @@ const Abilities = sequelize.define("Abilities", {
         type: DataTypes.STRING,
         allowNull: false
     }
+    }, {
+  tableName: 'abilities'
 });
 
-module.exports = Abilities;
+export default Abilities;
