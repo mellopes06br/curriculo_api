@@ -2,7 +2,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 
-const db = require('./models'); // Importa o 'models/index.js'
+import models, { sequelize } from "./models";
 
 const app = express();
 
@@ -22,7 +22,7 @@ async function iniciarServidor() {
   try {
     // Sincroniza os models com o banco de dados
     // { force: false } garante que as tabelas não sejam recriadas
-    await db.sequelize.sync({ force: false }); 
+    await models.sequelize.sync({ force: false }); 
     console.log('Tabelas sincronizadas com o banco de dados. 🔄');
 
     app.listen(PORT, () => {

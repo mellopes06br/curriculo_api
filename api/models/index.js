@@ -58,4 +58,4 @@ const db = {
 
 
 export { sequelize };
-module.exports = db;
+export default models;
