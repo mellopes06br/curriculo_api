@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3000;
 async function iniciarServidor() {
   try {
 
-    await db.sequelize.sync({ force: false });
+    await db.sequelize.sync({ force: true });
     console.log('Tabelas sincronizadas com o banco de dados. 🔄');
 
     app.listen(PORT, () => {

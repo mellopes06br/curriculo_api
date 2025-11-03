@@ -3,11 +3,11 @@ import Person from './person.js';
 import Experiences from './experiences.js';
 import Abilities from './abilities.js';
 
-
 // 1-para-N: Uma Pessoa pode ter muitas Experiencias
 Person.hasMany(Experiences, {
   foreignKey: 'personId',
-  as: 'experiences'
+  as: 'experiences',
+  onDelete: 'CASCADE' 
 });
 Experiences.belongsTo(Person, {
   foreignKey: 'personId',
@@ -17,7 +17,8 @@ Experiences.belongsTo(Person, {
 // 1-para-N: Uma Pessoa pode ter muitas Habilidades
 Person.hasMany(Abilities, {
   foreignKey: 'personId',
-  as: 'abilities'
+  as: 'abilities',
+  onDelete: 'CASCADE' 
 });
 Abilities.belongsTo(Person, {
   foreignKey: 'personId',
@@ -32,5 +33,4 @@ const db = {
   Abilities
 };
 
-// Exportação padrão do objeto 'db'
 export default db;
