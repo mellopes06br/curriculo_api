@@ -1,34 +1,25 @@
-import "dotenv/config";
 import cors from "cors";
 import express from "express";
 
-import db from "./models/index.js";
+// Rotas
+import personRoutes from './routes/personRoutes.js';
+import experienceRoutes from './routes/experienceRoutes.js';
+import abilitiesRoutes from './routes/abilitiesRoutes.js';
+
 
 const app = express();
 
-// --- Middlewares ---
+//Middlewares
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/pessoa', personRoutes);
+app.use('/api/experiencia', experienceRoutes);
+app.use('/api/habilidade', abilitiesRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('API do Currículo está no ar!');
 });
 
-
-const PORT = process.env.PORT || 3000;
-
-async function iniciarServidor() {
-  try {
-
-    await db.sequelize.sync({ force: true });
-    console.log('Tabelas sincronizadas com o banco de dados. 🔄');
-
-    app.listen(PORT, () => {
-      console.log(`Servidor rodando na porta ${PORT} 🚀`);
-    });
-  } catch (error) {
-    console.error('Erro ao sincronizar ou iniciar o servidor: 🔴', error);
-  }
-}
-
-iniciarServidor();
+export default app;
