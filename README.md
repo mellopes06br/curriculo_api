@@ -1,6 +1,6 @@
 # Currículo API
 
-Uma API simples para gerenciar dados de currículo — ideal para integrar a um site pessoal, portfólio ou aplicativo de currículo digital.
+Uma API simples para gerenciar dados de currículo
 
 ## 🔍 Visão geral
 
